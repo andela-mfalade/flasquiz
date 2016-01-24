@@ -1,14 +1,12 @@
 import os
-import webbrowser
 
 from flask import Flask
+from flask import url_for
 
-from routes import main
+import app_routes
 
 app = Flask(__name__)
-
-
-main(app)
+app_routes.router(app)
 
 if __name__ == '__main__':
     HOST = os.environ.get('SERVER_HOST', 'localhost')
@@ -16,5 +14,4 @@ if __name__ == '__main__':
         PORT = os.environ.get('SERVER_PORT', 5555)
     except ValueError:
         PORT = 5555
-    webbrowser.open('http://localhost/5555')
     app.run(HOST, PORT, debug=True)
