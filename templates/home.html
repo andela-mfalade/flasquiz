@@ -9,6 +9,7 @@
         <script src="{{ home_page_script}}"></script>
     </head>
     <body>
+        {% block content %}{% endblock %}
         <section id="login">
             <div class="container">
             	<div class="row">
@@ -20,16 +21,18 @@
                             <div class="test4"><a href="/create"><i class="fa fa-question-circle fa-2x"></i></a></div>
                             <div class="mask2"><i class="fa fa-home fa-3x"></i></div>
                         </div>
-            		</div> <!-- /.col-xs-12 -->
-            	</div> <!-- /.row -->
-            </div> <!-- /.container -->
-
+            		</div>
+            	</div>
+            </div>
         </section>
-        <div class="col-md-4 titles">
+
+        <div class="titles">
             <h4 id="title_title">Available Question Titles.</h4>
             {% for item in titles %}
-            <div class="tags">
-                <a href="{{'/question/' + item}}">{{ item }}</a>
+            <div class="col-md-1">
+                <div class="tags">
+                    <a href="{{'/question/' + item}}">{{ item }}</a>
+                </div>
             </div>
             {% endfor %}
         </div>

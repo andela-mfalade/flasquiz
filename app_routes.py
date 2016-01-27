@@ -1,3 +1,4 @@
+from flask import abort
 from flask import render_template
 from flask import request
 from flask import url_for
@@ -49,30 +50,34 @@ def router(app):
     def answer_question(title):
         style_sheet = url_for('static', filename='css/style.css')
         question = db_service.get_question(title)
-
-        if request.method == 'GET':
-            return render_template(
-                'answer_question.html',
-                question=question['question'],
-                style_sheet=style_sheet
-            )
-        if request.method == 'POST':
-            submitted_answer = request.form['answer']
-            answer = question['answer']
-
-            if submitted_answer in str(answer).lower():
+        if question:
+            if request.method == 'GET':
                 return render_template(
-                    'feedback/correct.html',
+                    'answer_question.html',
                     question=question['question'],
-                    submitted_answer=submitted_answer,
                     style_sheet=style_sheet
                 )
-            else:
-                return render_template(
-                    'feedback/oops.html',
-                    submitted_answer=submitted_answer,
-                    answer=answer,
-                    style_sheet=style_sheet
-                )
+            if request.method == 'POST':
+                submitted_answer = request.form['answer']
+                answer = question['answer']
+
+                if str(submitted_answer).lower() in str(answer).lower():
+                    return render_template(
+                        'feedback/correct.html',
+                        question=question['question'],
+                        submitted_answer=submitted_answer,
+                        style_sheet=style_sheet
+                    )
+                else:
+                    return render_template(
+                        'feedback/oops.html',
+                        submitted_answer=submitted_answer,
+                        answer=answer,
+                        style_sheet=style_sheet
+                    )
         else:
-            return "Invalid Request."
+            abort(404)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('feedback/404.html'), 404

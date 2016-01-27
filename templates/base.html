@@ -1,0 +1,28 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Welcome to Flasquiz</title>
+    {% endif %}
+    {% block header_links %}{% endblock %}
+  </head>
+  <body>
+      <section id="login">
+        <div class="container">
+          <div class="row">
+              <div class="col-xs-12">
+                  <div class="parent2">
+                      <div class="test1"><a href="/question/test"><i class="fa fa-user fa-2x"></i></a></div>
+                      <div class="test2"><a href="/question/test"><i class="fa fa-graduation-cap fa-2x"></i></a></div>
+                      <div class="test3"><a href="/create"><i class="fa fa-code fa-2x"></i></a></div>
+                      <div class="test4"><a href="/create"><i class="fa fa-question-circle fa-2x"></i></a></div>
+                      <div class="mask2"><i class="fa fa-home fa-3x"></i></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        </section>
+    {% block content %}{% endblock %}
+  </body>
+</html>

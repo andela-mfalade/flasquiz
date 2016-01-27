@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block header_links %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ home_style }}">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="{{ home_page_script}}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="titles">
+        <h4 id="title_title">Available Question Titles.</h4>
+        {% for item in titles %}
+        <div class="col-md-1">
+            <div class="tags">
+                <a href="{{'/question/' + item}}">{{ item }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
