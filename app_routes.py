@@ -46,7 +46,7 @@ def router(app):
         else:
             return "Invalid Request."
 
-    @app.route('/question/<title>', methods=['GET', 'POST'])
+    @app.route('/question/<title>', methods=['GET', 'POST', 'DELETE'])
     def answer_question(title):
         style_sheet = url_for('static', filename='css/style.css')
         question = db_service.get_question(title)
